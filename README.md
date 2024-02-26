@@ -16,8 +16,7 @@ CREATE TABLE `media_tags` (
 
 CREATE TABLE `role` (
   `id` int(11) NOT NULL,
-  `name` varchar(40) NOT NULL,
-  `user_email` varchar(40) NOT NULL
+  `name` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE `tags` (
@@ -28,7 +27,8 @@ CREATE TABLE `tags` (
 CREATE TABLE `user` (
   `id` varchar(10) NOT NULL,
   `name` varchar(40) NOT NULL,
-  `email` varchar(40) NOT NULL
+  `email` varchar(40) NOT NULL,
+  `role_id` int(11) NOT NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Índices de las tablas
@@ -41,14 +41,14 @@ ALTER TABLE `media_tags`
   ADD KEY `media_tags_ibfk_2` (`tags_id`);
 
 ALTER TABLE `role`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_email` (`user_email`);
+  ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `tags`
   ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
+  ADD KEY `role_id` (`role_id`);
   ADD UNIQUE KEY `email` (`email`);
 
 -- Autoincrements de las tablas
